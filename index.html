@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxury Real Estate Listings</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <style>
+    /* Internal CSS */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+    }
+    .myall{
+    position: relative;
+    width: 100%;
+    height: 370px; /* Full viewport height */
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQKcdiLrhs8IQODhTxmeZ8od70ILgPiZApHlHG2BbhCNT4k49Hj_ZDcfM&s=10') center/cover no-repeat;
+    }
+
+    header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with 50% transparency */
+    z-index: 1; /* Ensures it stays above the background */
+    color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 36px;
+    }
+
+    .navbar {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    .navbar li {
+      display: inline;
+      margin: 0 15px;
+    }
+
+    .navbar a {
+    
+      color: yellow;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .search-container {
+      background-color: dimgrey;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-bar {
+      padding: 10px;
+      width: 300px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+
+    .search-btn {
+      padding: 10px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .service-item {
+      background-color: white;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .service-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .service-item h3 {
+      font-size: 22px;
+      margin-top: 10px;
+      color: #2c3e50;
+    }
+
+    .service-item p {
+      font-size: 16px;
+      color: #7f8c8d;
+    }
+    
+    .overlay {
+    /* Height & width depends on how you want to reveal the overlay (see JS below) */   
+    height: 100%;
+    width: 0;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    background-color: rgb(0,0,0); /* Black fallback color */
+    background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+    }
+    
+    /* Position the content inside the overlay */
+    .overlay-content {
+    position: relative;
+    top: 25%; /* 25% from the top */
+    width: 100%; /* 100% width */
+    text-align: center; /* Centered text/links */
+    margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+    }
+    
+    /* The navigation links inside the overlay */
+    .overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block; /* Display block instead of inline */
+    transition: 0.3s; /* Transition effects on hover (color) */
+    }
+    
+    /* When you mouse over the navigation links, change their color */
+    .overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+    }
+    
+    /* Position the close button (top right corner) */
+    .overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+    }
+    
+    /* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
+    @media screen and (max-height: 450px) {
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+    }
+    }
+    
+    .hidden {
+    display:none;
+    }
+
+    footer {
+      background-color: #333333;
+      color: floralwhite;
+      text-align: center;
+      padding: 10px;
+      position: ;
+      width: 95%;
+      bottom: 0;
+    }
+form input{
+padding: 10px;
+      background-color: white;
+      color: ;
+      border: solid yellow;
+      border-radius: 5px;
+      cursor: pointer;
+}
+
+#my-back{height:40px;
+margin-left:130px;
+display:none;}
+  </style>
+</head>
+<body>
+<div class="myall">
+<header>
+  <h1>Glorious Care Home LTD.</h1>
+  <ul class="navbar">
+    <li><a href="#" id="show-home"><h2><b>Home</b></h2></a></li>
+    </ul>
+    <p>Your Trusted Partner in Home Care</p>
+    
+  <main>
+  
+  <div id="myNav" class="overlay">
+  
+  <!-- Button to close the overlay navigation -->
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  
+  <!-- Overlay content -->
+  <div class="overlay-content">
+  <a href="#" onclick="About()" id="show-about">About</a>
+  <a href="#" onclick="Service()" id="show-service">Services</a>
+  <a href="#" onclick="client()"id="show-client">Clients</a>
+  <a href="#" onclick="contact()"id="show-contact">Contact</a>
+  </div>
+  
+  </div>
+ 
+  <span onclick="openNav()"><i class="fa fa-bars"style="color:;position:relative;right:110px;top:10px;font-size:30px;"></i></span>
+  
+  <button onclick="showme()"style="background-color:#e74c3c;color:white;border:solid white;position:relative;left:100px;top:5px;">open</button>
+  
+  
+</header>
+</div>
+<section id="my-home" class="">
+  <!-- Search Section -->
+  <div class="search-container">
+    <input type="text" id="searchInput" class="search-bar" placeholder="Search services...">
+    <button class="search-btn" onclick="filterServices()">Search</button>
+  </div>
+
+  <!-- Service Listings -->
+  <div class="service-grid">
+    <div class="service-item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnneadAYlcGrKB_TsHP-g0KyTdN3Z4qOzCpw&usqp=CAU" onclick="showDetails()" alt="Companion Care">
+      <h3>Companion Care</h3>
+      <p>Providing companionship and emotional support for seniors.</p>
+    </div>
+    <div class="service-item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDe6FdbkBzkd3vd_2WQU6DLDj148qIJ5dYXg&usqp=CAU" onclick="showDetails()" alt="Personal Care">
+      <h3>Personal Care</h3>
+      <p>Assisting with daily tasks like bathing, dressing, and grooming.</p>
+    </div>
+    <div class="service-item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMQHQSZvLNVrhj950PS2QpBVMjGSWsQHF7Hw&usqp=CAU" onclick="showDetails()" alt="Meal Preparation">
+      <h3>Meal Preparation</h3>
+      <p>Nutritious meal planning and preparation tailored to individual needs.</p>
+    </div>
+    
+    <div class="service-item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEEB2oe-Mg6AWkPWYtmy2D-jyTmgIAJCmcjL_-OViuyZUE9WQ1fx4d2P0&s=10" onclick="showDetails()" alt="Medication Management">
+      <h3>Medication Management</h3>
+      <p>Helping clients take their medications on time and as prescribed.</p>
+    </div>
+    <div class="service-item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR-U-3ZzjpZ6DVJnJiYrmsZR1Ivmx9XQw8-A&usqp=CAU" onclick="showDetails()" alt="Specialized Care">
+      <h3>Specialized Care</h3>
+      <p>Customized care for individuals with dementia, Alzheimer’s, and other conditions.</p>
+    </div>
+    <div class="service-item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKHKbmMK2coX0WkDGlsBxDHJNlZF2ThSf0JDa1y_prnamno4iFa17Qb6Y&s=10" onclick="showDetails()" alt="Transportation Services">
+      <h3>Transportation Services</h3>
+      <p>Providing safe and reliable transportation to appointments and errands.</p>
+    </div>
+  </div>
+ 
+</section>
+
+
+
+
+
+
+
+
+
+
+<section id="service" class="hidden">
+  <div style="padding: 50px; background-color: #f4f4f4;">
+    <h2 style="text-align: center; font-size: 36px; color: #e74c3c;">Our Services</h2>
+    <p style="text-align: center; font-size: 18px; color: #7f8c8d; margin-bottom: 30px;">
+      At Glorious Care Home LTD, we provide exceptional home care services tailored to meet the unique needs of our clients. Our compassionate team is dedicated to enhancing the quality of life for you and your loved ones.
+    </p>
+
+    <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+      <!-- Service 1 -->
+      <div style="width: 80%; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); text-align: center;">
+        <i class="fa fa-heartbeat" style="font-size: 48px; color: #e74c3c;"></i>
+        <h3 style="font-size: 28px; color: #2c3e50; margin: 20px 0;">Personal Care</h3>
+        <p style="font-size: 18px; color: #7f8c8d;">
+          Our caregivers assist with daily tasks such as bathing, grooming, dressing, and personal hygiene to ensure comfort and dignity.
+        </p>
+      </div>
+
+      <!-- Service 2 -->
+      <div style="width: 80%; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); text-align: center;">
+        <i class="fa fa-cutlery" style="font-size: 48px; color: #e74c3c;"></i>
+        <h3 style="font-size: 28px; color: #2c3e50; margin: 20px 0;">Meal Preparation</h3>
+        <p style="font-size: 18px; color: #7f8c8d;">
+          We prepare nutritious and delicious meals tailored to meet dietary needs, ensuring our clients enjoy every bite.
+        </p>
+      </div>
+
+      <!-- Service 3 -->
+      <div style="width: 80%; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); text-align: center;">
+        <i class="fa fa-medkit" style="font-size: 48px; color: #e74c3c;"></i>
+        <h3 style="font-size: 28px; color: #2c3e50; margin: 20px 0;">Medication Management</h3>
+        <p style="font-size: 18px; color: #7f8c8d;">
+          Our team ensures timely medication reminders and administration, prioritizing health and safety at all times.
+        </p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <h3 style="font-size: 28px; color: #2c3e50;">Companionship Services</h3>
+      <p style="font-size: 18px; color: #7f8c8d; line-height: 1.6; max-width: 800px; margin: 0 auto;">
+        Loneliness can be a challenge, especially for the elderly. Our friendly caregivers provide companionship and engage clients in activities to promote mental and emotional well-being.
+      </p>
+    </div>
+  </div>
+
+  <div style="background-color: #333331; color: white; padding: 50px 20px; text-align: center;">
+    <h3 style="font-size: 28px;">Contact Us for Compassionate Care</h3>
+    <p style="font-size: 18px;">
+      Interested in our services? Contact Glorious Care Home LTD today to learn how we can provide the care and support your family deserves.
+    </p>
+    <a href="#" style="font-size: 20px; color: #e74c3c; text-decoration: none; font-weight: bold;">Get in Touch</a>
+  </div>
+</section>
+
+
+<section id="client" class="hidden">
+  <div style="padding: 50px 20px; background-color: #f4f4f4;">
+    <h2 style="text-align: center; font-size: 36px; color: #e74c3c;">Our Valued Clients</h2>
+    <p style="text-align: center; font-size: 18px; color: #7f8c8d; margin-bottom: 40px;">
+      At Glorious Care Home LTD, we are honored to serve clients who trust us to provide compassionate and professional home care services. Their satisfaction and well-being are at the heart of everything we do. Here are some kind words from our amazing clients and their families.
+    </p>
+
+    <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+      <!-- Client 1 -->
+      <div style="width: 80%; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); text-align: center;">
+        <i class="fa fa-user-circle" style="font-size: 48px; color: #e74c3c;"></i>
+        <h3 style="font-size: 28px; color: #2c3e50; margin: 20px 0;">The Johnson Family</h3>
+        <p style="font-size: 18px; color: #7f8c8d;">"Glorious Care Home LTD has been a blessing for our family. Their caregivers provide exceptional personal care for our elderly parents, ensuring they are comfortable and happy every day."</p>
+      </div>
+
+      <!-- Client 2 -->
+      <div style="width: 80%; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); text-align: center;">
+        <i class="fa fa-user-circle" style="font-size: 48px; color: #e74c3c;"></i>
+        <h3 style="font-size: 28px; color: #2c3e50; margin: 20px 0;">David & Maria Smith</h3>
+        <p style="font-size: 18px; color: #7f8c8d;">"The meal preparation and companionship services have made a world of difference for my uncle. The team at Glorious Care Home LTD is kind, patient, and truly cares about his well-being."</p>
+      </div>
+
+      <!-- Client 3 -->
+      <div style="width: 80%; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); text-align: center;">
+        <i class="fa fa-user-circle" style="font-size: 48px; color: #e74c3c;"></i>
+        <h3 style="font-size: 28px; color: #2c3e50; margin: 20px 0;">Emily Brown</h3>
+        <p style="font-size: 18px; color: #7f8c8d;">"The caregivers at Glorious Care Home LTD go above and beyond. Their medication management service has given us peace of mind, knowing my father is staying on top of his health needs."</p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <h3 style="font-size: 28px; color: #2c3e50;">More Client Testimonials</h3>
+      <p style="font-size: 18px; color: #7f8c8d; line-height: 1.6; max-width: 800px; margin: 0 auto;">
+        At Glorious Care Home LTD, we cherish the trust our clients place in us. Their feedback inspires us to continually improve and provide unparalleled care services. We are dedicated to making a positive impact in their lives every single day.
+      </p>
+    </div>
+  </div>
+
+  <div style="background-color: #333331; color: white; padding: 50px 20px; text-align: center;">
+    <h3 style="font-size: 28px;">Contact Us to Join Our Family of Happy Clients</h3>
+    <p style="font-size: 18px;">
+      Ready to experience compassionate and professional home care services? Contact Glorious Care Home LTD today and let us provide the care your family deserves.
+    </p>
+    <a href="#" style="font-size: 20px; color: #e74c3c; text-decoration: none; font-weight: bold;">Get in Touch</a>
+  </div>
+</section>
+
+
+
+<section id="client" class="hidden">
+  <div style="padding: 50px 20px; background-color: #f4f4f4;">
+    <h2 style="text-align: center; font-size: 36px; color: #e74c3c;">Our Valued Clients</h2>
+    <p style="text-align: center; font-size: 18px; color: #7f8c8d; margin-bottom: 40px;">
+      At Glorious Care Home LTD, we are honored to serve clients who trust us to provide compassionate and professional home care services. Their satisfaction and well-being are at the heart of everything we do. Here are some kind words from our amazing clients and their families.
+    </p>
+
+    <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+      <!-- Client 1 -->
+      <div style="width: 80%; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); text-align: center;">
+        <i class="fa fa-user-circle" style="font-size: 48px; color: #e74c3c;"></i>
+        <h3 style="font-size: 28px; color: #2c3e50; margin: 20px 0;">The Johnson Family</h3>
+        <p style="font-size: 18px; color: #7f8c8d;">"Glorious Care Home LTD has been a blessing for our family. Their caregivers provide exceptional personal care for our elderly parents, ensuring they are comfortable and happy every day."</p>
+      </div>
+
+      <!-- Client 2 -->
+      <div style="width: 80%; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); text-align: center;">
+        <i class="fa fa-user-circle" style="font-size: 48px; color: #e74c3c;"></i>
+        <h3 style="font-size: 28px; color: #2c3e50; margin: 20px 0;">David & Maria Smith</h3>
+        <p style="font-size: 18px; color: #7f8c8d;">"The meal preparation and companionship services have made a world of difference for my uncle. The team at Glorious Care Home LTD is kind, patient, and truly cares about his well-being."</p>
+      </div>
+
+      <!-- Client 3 -->
+      <div style="width: 80%; background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); text-align: center;">
+        <i class="fa fa-user-circle" style="font-size: 48px; color: #e74c3c;"></i>
+        <h3 style="font-size: 28px; color: #2c3e50; margin: 20px 0;">Emily Brown</h3>
+        <p style="font-size: 18px; color: #7f8c8d;">"The caregivers at Glorious Care Home LTD go above and beyond. Their medication management service has given us peace of mind, knowing my father is staying on top of his health needs."</p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <h3 style="font-size: 28px; color: #2c3e50;">More Client Testimonials</h3>
+      <p style="font-size: 18px; color: #7f8c8d; line-height: 1.6; max-width: 800px; margin: 0 auto;">
+        At Glorious Care Home LTD, we cherish the trust our clients place in us. Their feedback inspires us to continually improve and provide unparalleled care services. We are dedicated to making a positive impact in their lives every single day.
+      </p>
+    </div>
+  </div>
+
+  <div style="background: #333331; color: white; padding: 50px 20px; text-align: center;">
+    <h3 style="font-size: 28px;">Contact Us to Join Our Family of Happy Clients</h3>
+    <p style="font-size: 18px;">
+      Ready to experience compassionate and professional home care services? Contact Glorious Care Home LTD today and let us provide the care your family deserves.
+    </p>
+    <a href="#" style="font-size: 20px; color: #e74c3c; text-decoration: none; font-weight: bold;">Get in Touch</a>
+  </div>
+</section>
+
+<section id="about" class="hidden"> 
+  <div style="padding: 50px; background-color: #f4f4f4;">
+    <h2 style="text-align: center; font-size: 36px; color: #e74c3c;">About Us</h2>
+    <p style="text-align: center; font-size: 18px; color: #7f8c8d; margin-bottom: 30px;">
+      At Glorious Care Home LTD, we are dedicated to providing compassionate and personalized care services to enhance the quality of life for our clients and their families.
+    </p>
+
+    <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 40px;">
+      <div style="width: 80%; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);text-align:center;">
+        <h3 style="font-size: 28px; color: #2c3e50;">Who We Are</h3>
+        <p style="font-size: 18px; color: #7f8c8d; line-height: 1.6;">
+          Glorious Care Home LTD is a trusted home care service provider committed to supporting individuals in need of personalized care. From seniors requiring assistance with daily tasks to individuals recovering from illnesses, we offer a range of services designed to provide comfort, independence, and dignity. Our compassionate caregivers are trained professionals who treat every client like family.
+        </p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-bottom: 40px;">
+      <h3 style="font-size: 28px; color: #2c3e50;">Our Mission</h3>
+      <p style="font-size: 18px; color: #7f8c8d; line-height: 1.6; max-width: 800px; margin: 0 auto;">
+        Our mission is to deliver exceptional, client-centered care that enriches lives and fosters independence. We strive to create a safe, nurturing environment for all our clients while supporting their families with reliable and professional home care services.
+      </p>
+    </div>
+
+    <div style="text-align: center;text-align:center;">
+      <h3 style="font-size: 28px; color: #2c3e50;">Why Choose Us?</h3>
+      <ul style="list-style-type: none; padding: 0; display: inline-block; text-align: center; font-size: 18px; color: #7f8c8d;">
+        <li style="margin-bottom: 15px;">- Compassionate and Dedicated Caregivers</li>
+        <li style="margin-bottom: 15px;">- Personalized Care Plans Tailored to Your Needs</li>
+        <li style="margin-bottom: 15px;">- Comprehensive Services for All Ages</li>
+        <li style="margin-bottom: 15px;">- Commitment to Safety and Comfort</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="background-color: #333331; color: white; padding: 50px 20px; text-align: center;">
+    <h3 style="font-size: 28px; color: white;">Get in Touch</h3>
+    <p style="font-size: 18px;">Ready to experience compassionate care? Contact Glorious Care Home LTD today to learn how we can assist you and your loved ones.</p>
+    <a href="#" style="font-size: 20px; color: #e74c3c; text-decoration: none; font-weight: bold;">Contact Us</a>
+  </div>
+</section>
+
+
+<section id="contact" class="hidden">
+  <div style="padding: 50px; background-color: #f4f4f4;">
+    <h2 style="text-align: center; font-size: 36px; color: #e74c3c;">Contact Us</h2>
+    <p style="text-align: center; font-size: 18px; color: #7f8c8d; margin-bottom: 30px;">
+      We’d love to hear from you! Please fill out the form below or reach us using the contact details provided.
+    </p>
+
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <div style="width: 100%; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);">
+        <form id="contact-form" action="#" method="post">
+          <div style="margin-bottom: 15px;">
+            <label for="name" style="margin-bottom: 10px; font-size: 18px; color: #2c3e50; display: block;"><b>Full Name</b></label>
+            <input type="text" id="name" name="name" style="width: 80%; padding: 12px; border: 1px solid yellow; border-radius: 4px; font-size: 16px;" required>
+          </div>
+          <div style="margin-bottom: 15px;">
+            <label for="email" style="margin-bottom: 10px; font-size: 18px; color: #2c3e50; display: block;"><b>Email Address</b></label>
+            <input type="email" id="email" name="email" style="width: 80%; padding: 12px; border: 1px solid yellow; border-radius: 4px; font-size: 16px;" required>
+          </div>
+          <div style="margin-bottom: 15px;">
+            <label for="message" style="margin-bottom: 10px; font-size: 18px; color: #2c3e50; display: block;"><b>Message</b></label>
+            <textarea id="message" name="message" rows="6" style="width: 80%; padding: 12px; border: 1px solid yellow; border-radius: 4px; font-size: 16px;" required></textarea>
+          </div>
+          <button id="contact-submit" type="submit" style="padding: 12px 20px; background-color: #e74c3c; color: white; border: none; border-radius: 4px; font-size: 18px; cursor: pointer; position: relative; left: 15px;">Send Message</button>
+        </form>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; text-align: center;">
+      <h3 style="font-size: 24px; color: #2c3e50;">Visit Us</h3>
+      <p style="font-size: 18px; color: #7f8c8d;">123 Care Home Avenue, Oghara, Delta State</p>
+
+      <h3 style="font-size: 24px; color: #2c3e50;">Call Us</h3>
+      <p style="font-size: 18px; color: #7f8c8d;">+234 (811) 123-4567</p>
+
+      <h3 style="font-size: 24px; color: #2c3e50;">Email Us</h3>
+      <p style="font-size: 18px; color: #7f8c8d;">info@gloriouscarehome.com</p>
+
+      <h3 style="font-size: 24px; color: #2c3e50;">Follow Us</h3>
+      <a href="https://www.facebook.com/gloriouscarehome" style="font-size: 30px; color: #3b5998; margin: 0 15px; text-decoration: none;"><i class="fa fa-facebook"></i></a>
+      <a href="https://twitter.com/gloriouscarehome" style="font-size: 30px; color: #1da1f2; margin: 0 15px; text-decoration: none;"><i class="fa fa-twitter"></i></a>
+      <a href="https://www.instagram.com/gloriouscarehome" style="font-size: 30px; color: #e4405f; margin: 0 15px; text-decoration: none;"><i class="fa fa-instagram"></i></a>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+  
+</main>
+<footer>
+  <p>&copy; 2024 Glorious Care Home LTD. All Rights Reserved.</p>
+</footer>
+
+<!-- JavaScript for Filtering -->
+<script>
+  function filterServices() {
+    const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const propertyItems = document.querySelectorAll('.service-item');
+    
+    propertyItems.forEach(item => {
+      const title = item.querySelector('h3').textContent.toLowerCase();
+      if (title.includes(searchInput)) {
+        item.style.display = 'block';
+        
+      } else {
+        propertyItems.style.display = 'block';
+        
+      }
+    });
+  }
+
+  
+  
+  
+   function showme(){
+   alert("we are always active  24/7.");}
+  
+  function openNav() {
+  document.getElementById("myNav").style.width = "100%";
+  }
+  
+  /* Close when someone clicks on the "x" symbol inside the overlay */
+  function closeNav() {
+  document.getElementById("myNav").style.width = "0%";
+  }
+  
+  function Service() {
+  document.getElementById("myNav").style.width = "0%";
+  
+  document.getElementById("my-home").classList.add("hidden");
+  document.getElementById("client").classList.add("hidden");
+  document.getElementById("about").classList.add("hidden");
+  document.getElementById("contact").classList.add("hidden");
+  
+  document.getElementById("service").classList.remove("hidden");
+  }
+  
+  
+  
+  function client() {
+  document.getElementById("myNav").style.width = "0%";
+  
+  document.getElementById("my-home").classList.add("hidden");
+  document.getElementById("service").classList.add("hidden");
+  document.getElementById("contact").classList.add("hidden");
+  document.getElementById("about").classList.add("hidden");
+  
+  document.getElementById("client").classList.remove("hidden");
+  }
+  
+  function About() {
+  document.getElementById("myNav").style.width = "0%";
+  
+  document.getElementById("my-home").classList.add("hidden");
+  document.getElementById("service").classList.add("hidden");
+  document.getElementById("client").classList.add("hidden");
+  document.getElementById("contact").classList.add("hidden");
+  
+  document.getElementById("about").classList.remove("hidden");
+  }
+  
+  function contact() {
+  document.getElementById("myNav").style.width = "0%";
+  
+  document.getElementById("my-home").classList.add("hidden");
+  document.getElementById("service").classList.add("hidden");
+  document.getElementById("client").classList.add("hidden");
+  document.getElementById("about").classList.add("hidden");
+  
+  document.getElementById("contact").classList.remove("hidden");
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  document.getElementById("show-home").addEventListener("click", function() {
+  
+  
+  
+  document.getElementById("service").classList.add("hidden");
+  document.getElementById("client").classList.add("hidden");
+  document.getElementById("about").classList.add("hidden");
+  document.getElementById("contact").classList.add("hidden");
+  
+  document.getElementById("my-home").classList.remove("hidden");
+  });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  document.getElementById("contact-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+  let Name= document.getElementById("name").value;
+  let Email = document.getElementById("email").value;
+  let Message = document.getElementById("message").value;
+  
+  if (Name && Email) {
+  alert(`Welcome, ${Name} ! Your message has been recieved. We will get back to you as soon as posible through your Email adress (${Email}). Thank you.`);
+  document.getElementById("contact").classList.add("hidden");
+  document.getElementById("my-home").classList.remove("hidden");
+  } else {
+  document.getElementById("enterError").textContent = "Please fill all fields!";
+  }
+  });
+  
+  
+  
+  
+</script>
+
+</body>
+</html>
